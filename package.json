@@ -5,7 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test": "node --test tests/",
+    "test": "node --test tests/run.test.js",
     "start": "npx --yes serve ."
   },
   "author": "lawrensesqq <henryjonsonx@gmail.com>",
