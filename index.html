@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>subshift — fix out-of-sync subtitles in your browser</title>
+  <meta name="description" content="Fix subtitle delay, frame-rate drift and broken encodings. Runs entirely in your browser; files never leave your computer.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>subshift</h1>
+    <p class="tag">Fix out-of-sync subtitles. Nothing is uploaded: your file stays in your browser.</p>
+  </header>
+
+  <main>
+    <section id="drop" class="drop" tabindex="0">
+      <input type="file" id="file" accept=".srt,.vtt,.txt" hidden>
+      <p><strong>Drop an .srt or .vtt file here</strong> or <label for="file" class="link">choose a file</label></p>
+      <p id="fileinfo" class="muted"></p>
+    </section>
+
+    <section id="tools" hidden>
+      <nav class="tabs" role="tablist">
+        <button role="tab" data-mode="shift" aria-selected="true">Shift</button>
+        <button role="tab" data-mode="sync">Two-point sync</button>
+        <button role="tab" data-mode="fps">Frame rate</button>
+      </nav>
+
+      <div class="panel" data-panel="shift">
+        <p class="muted">Every subtitle is early or late by the same amount.</p>
+        <label>Offset (seconds, negative = earlier)
+          <input id="offset" value="0" inputmode="decimal">
+        </label>
+      </div>
+
+      <div class="panel" data-panel="sync" hidden>
+        <p class="muted">Subtitles start in sync and slowly drift, or the delay differs at the start and the end.
+          Pick one line near the start and one near the end, and type when each is actually spoken in the video.</p>
+        <div class="grid">
+          <label>Line near the start <select id="c1"></select></label>
+          <label>is spoken at <input id="t1" placeholder="00:01:02,500"></label>
+          <label>Line near the end <select id="c2"></select></label>
+          <label>is spoken at <input id="t2" placeholder="01:32:10,000"></label>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="fps" hidden>
+        <p class="muted">The subtitles were made for a different release (e.g. a 25 fps PAL rip vs 23.976 fps Blu-ray).</p>
+        <div class="grid">
+          <label>Subtitles made for <select id="fpsFrom"></select></label>
+          <label>Your video <select id="fpsTo"></select></label>
+        </div>
+      </div>
+
+      <p id="error" class="error" role="alert"></p>
+      <p id="summary" class="muted"></p>
+
+      <table id="preview">
+        <thead><tr><th>#</th><th>Before</th><th>After</th><th>Text</th></tr></thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="actions">
+        <button id="dlSrt" class="primary">Download .srt</button>
+        <button id="dlVtt">Download .vtt</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="https://github.com/lawrensesqq/subshift">Source on GitHub</a> · MIT licence
+  </footer>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

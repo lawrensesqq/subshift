@@ -1,0 +1,15 @@
+{
+  "name": "subshift",
+  "version": "1.0.0",
+  "description": "Fix out-of-sync subtitles (delay, frame-rate drift, legacy encodings) entirely in the browser.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/",
+    "start": "npx --yes serve ."
+  },
+  "author": "lawrensesqq <henryjonsonx@gmail.com>",
+  "license": "MIT",
+  "repository": "github:lawrensesqq/subshift",
+  "engines": { "node": ">=20" }
+}

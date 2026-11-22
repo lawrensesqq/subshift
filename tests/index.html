@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>subshift tests</title>
+<style>body{font:14px/1.5 ui-monospace,monospace;padding:20px}.ok{color:#1a7f37}.fail{color:#b3261e;white-space:pre-wrap}</style>
+<h1>subshift tests</h1>
+<div id="out"></div>
+<script type="module">
+  import { cases } from "./cases.js";
+  const out = document.getElementById("out");
+  let failed = 0;
+  for (const [name, fn] of cases) {
+    const p = document.createElement("div");
+    try { fn(); p.className = "ok"; p.textContent = "✓ " + name; }
+    catch (e) { failed++; p.className = "fail"; p.textContent = "✗ " + name + "\n" + e.message; }
+    out.append(p);
+  }
+  const s = document.createElement("h2");
+  s.id = "result";
+  s.textContent = failed ? `${failed} failed` : `all ${cases.length} passed`;
+  out.prepend(s);
+</script>
